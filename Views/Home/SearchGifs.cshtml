@@ -1,0 +1,37 @@
+﻿@{    
+    ViewData["Title"] = "Search GIFs";
+}
+<h1>@ViewData["Title"]</h1>
+<form id="searchform" method="GET" action="/Home/Search" onsubmit="return validateSearchForm()">
+    <input id="searchWord" type="text" name="searchWord" />
+    <button type="submit">Search</button>
+</form>
+@if (Model != null)
+{
+    if (Model.Data.Count == 0) {
+        <div>No results have been found</div>
+    }
+    else {
+        foreach (var element in Model.Data)
+        {
+            <p>@Html.DisplayFor(m => element)</p>
+            <img id="gif" src="@element.Url"
+            alt="gif image" />        
+        }
+    }    
+}
+<script>
+    $(document).ready(function() {
+        if (@(Model != null).ToString().ToLower()) {
+            $('#searchform').hide();
+        }
+    });
+
+    function validateSearchForm() {
+        var searchWord = document.getElementById("searchWord").value;
+        if (searchWord.trim() === "") {
+            return false;
+        }
+        return true;
+    }
+</script>

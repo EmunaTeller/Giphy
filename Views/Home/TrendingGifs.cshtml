@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Trending GIFs";
+}
+<h1>@ViewData["Title"]</h1>
+@foreach (var element in Model.Data)
+    {
+        <p>@Html.DisplayFor(m => element)</p>
+        <img id="gif" src="@element.Url"
+        alt="gif image" />        
+    }
